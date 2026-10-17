@@ -1,0 +1,253 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>MY MONEY MAP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+TC:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: 單欄手機優先的長頁，跟著她腦中的問題一段一段往下走；黑底金字，只有價格與按鈕用實心金 */
+:root{
+  --ink:#12100D; --panel:#1A1713; --line:#3A3227;
+  --gold:#C9A96B; --gold-hi:#E2CB98; --cream:#EFE8DA; --mute:#B8AD99; --dim:#8F8572;
+  --serif:'Noto Serif TC','Songti TC','PMingLiU',Georgia,serif;
+  --latin:'Cormorant Garamond','Noto Serif TC',Georgia,serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ink);color:var(--cream);font-family:var(--serif);font-weight:300;font-size:16px;line-height:1.85;letter-spacing:.02em;padding-inline:20px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:680px;margin:0 auto}
+section{padding-block:72px;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+h1,h2,h3{font-weight:500;text-wrap:balance;margin:0}
+p{margin:0}
+.eyebrow{font-family:var(--latin);font-size:13px;letter-spacing:.32em;color:var(--gold);text-transform:uppercase}
+.stack{display:flex;flex-direction:column;gap:20px}
+.mute{color:var(--mute)} .dim{color:var(--dim)}
+em{font-style:normal;color:var(--gold-hi)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--gold);color:var(--ink);font-family:var(--serif);font-weight:600;font-size:16px;letter-spacing:.12em;text-decoration:none;padding:16px 34px;border-radius:2px;transition:background .2s}
+.btn:hover{background:var(--gold-hi)}
+.btn:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
+h2{font-size:clamp(22px,5.4vw,28px);line-height:1.5}
+
+/* hero */
+.hero{padding-block:88px 72px;display:flex;flex-direction:column;gap:28px}
+.hero h1{font-size:clamp(26px,6.6vw,36px);line-height:1.5;letter-spacing:.04em}
+.hero .brand{font-family:var(--latin);font-weight:500;font-size:clamp(34px,9vw,52px);letter-spacing:.14em;color:var(--gold);line-height:1.1}
+.hero .route{width:100%;height:auto;max-width:100%}
+.hero .note{font-size:13px}
+
+/* pain list */
+.pains{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.pains li{padding:18px 0;border-bottom:1px solid var(--line);display:flex;gap:16px;align-items:baseline}
+.pains li::before{content:"";flex:none;width:12px;height:12px;border:1px solid var(--gold);border-radius:50%;transform:translateY(1px)}
+
+/* order */
+.order{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.order div{background:var(--ink);padding:22px 12px;text-align:center;display:flex;flex-direction:column;gap:4px}
+.order b{font-family:var(--latin);font-weight:500;font-size:22px;color:var(--gold);letter-spacing:.06em}
+.order span{font-size:14px;color:var(--mute)}
+.wrong{font-size:14px;color:var(--dim)}
+.wrong s{color:var(--dim)}
+
+/* five things */
+.five{display:flex;flex-direction:column;gap:0;counter-reset:f}
+.five div{display:grid;grid-template-columns:44px 1fr;gap:4px 12px;padding:20px 0;border-bottom:1px solid var(--line)}
+.five div::before{counter-increment:f;content:counter(f);grid-row:span 2;font-family:var(--latin);font-size:30px;color:var(--gold);line-height:1}
+.five h3{font-size:17px}
+.five p{font-size:14px;color:var(--mute);min-width:0}
+
+/* map mock */
+.map{background:var(--panel);border:1px solid var(--line);padding:28px 22px;display:flex;flex-direction:column;gap:22px}
+.map-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.map-head .t{font-family:var(--latin);font-size:22px;letter-spacing:.16em;color:var(--gold)}
+.tag{font-size:12px;color:var(--dim);border:1px solid var(--line);padding:2px 10px;border-radius:20px}
+.nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.nums div{display:flex;flex-direction:column;gap:2px}
+.nums small{font-size:12px;color:var(--dim)}
+.nums b{font-family:var(--latin);font-weight:500;font-size:clamp(18px,4.8vw,24px);font-variant-numeric:tabular-nums;color:var(--cream)}
+.bars{display:flex;flex-direction:column;gap:10px}
+.bar{display:grid;grid-template-columns:64px 1fr 72px;gap:10px;align-items:center;font-size:13px}
+.bar i{display:block;height:6px;background:var(--line);position:relative}
+.bar i::after{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--gold)}
+.bar span:last-child{text-align:right;font-variant-numeric:tabular-nums;color:var(--mute)}
+.goals{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.goals div{display:flex;justify-content:space-between;gap:12px;border-top:1px dashed var(--line);padding-top:8px}
+.goals span:last-child{color:var(--gold-hi);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* steps */
+.steps{display:flex;flex-direction:column}
+.step{display:grid;grid-template-columns:76px 1fr;gap:16px;padding:22px 0;border-bottom:1px solid var(--line)}
+.step .k{font-family:var(--latin);font-size:20px;letter-spacing:.14em;color:var(--gold);line-height:1.3}
+.step .k small{display:block;font-size:12px;letter-spacing:.1em;color:var(--dim)}
+.step p{font-size:14px;color:var(--mute)}
+.step h3{font-size:16px;margin-bottom:4px}
+
+/* fit */
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.fit h3{font-size:15px;color:var(--gold);letter-spacing:.1em;margin-bottom:10px}
+.fit ul{margin:0;padding-left:1.1em;font-size:14px;display:flex;flex-direction:column;gap:8px}
+.fit .no{color:var(--mute)}
+@media (max-width:560px){.fit{grid-template-columns:1fr}}
+
+/* proof placeholder */
+.proof{border:1px dashed var(--dim);padding:22px;font-size:14px;color:var(--dim)}
+
+/* price */
+.price{background:radial-gradient(ellipse at 30% 0%,#2A2318 0%,var(--ink) 70%);border:1px solid var(--gold);padding:40px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
+.price .amt{font-family:var(--latin);font-weight:500;font-size:clamp(48px,13vw,64px);color:var(--gold);line-height:1;font-variant-numeric:tabular-nums}
+.buy{display:flex;flex-direction:column;gap:12px;width:100%;max-width:320px}
+.early{font-size:13px;letter-spacing:.12em;color:var(--ink);background:var(--gold);padding:4px 16px;border-radius:20px}
+.was{font-family:var(--latin);font-size:22px;color:var(--dim);text-decoration:line-through;line-height:1}
+.price ul{list-style:none;margin:0;padding:0;font-size:14px;color:var(--mute);display:flex;flex-direction:column;gap:6px}
+.price .live{font-size:13px;color:var(--gold-hi);border-top:1px solid var(--line);padding-top:14px;width:100%}
+
+/* faq */
+details{border-bottom:1px solid var(--line);padding:18px 0}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;font-size:16px;font-weight:400}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--latin);color:var(--gold);font-size:22px;line-height:1}
+details[open] summary::after{content:"−"}
+details p{margin-top:10px;font-size:14px;color:var(--mute)}
+
+.final{text-align:center;align-items:center}
+footer{padding-block:40px 56px;border-top:1px solid var(--line);font-size:12px;color:var(--dim);text-align:center;display:flex;flex-direction:column;gap:6px}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero>*{animation:rise .9s ease both}
+  .hero>*:nth-child(2){animation-delay:.1s}.hero>*:nth-child(3){animation-delay:.2s}.hero>*:nth-child(4){animation-delay:.3s}
+  .route path{stroke-dasharray:640;stroke-dashoffset:640;animation:draw 2.4s .5s ease forwards}
+  @keyframes rise{from{transform:translateY(10px)}to{transform:none}}
+  @keyframes draw{to{stroke-dashoffset:0}}
+}
+
+/* mobile-tight overrides */
+.hero .brand{font-size:clamp(26px,7.4vw,48px);letter-spacing:.1em;white-space:nowrap}
+section{padding-block:44px}
+.hero{padding-block:48px 40px;gap:18px}
+.hero h1{font-size:clamp(24px,6.4vw,34px)}
+.stack{gap:16px}
+.pains li{padding:12px 0;font-size:15px}
+.gets{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.gets li{display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.gets li b{font-family:var(--latin);font-weight:500;font-size:20px;color:var(--gold);width:16px;flex:none}
+.map{padding:22px 18px;gap:18px}
+.fit{gap:20px}
+.price{padding:32px 20px;gap:12px}
+details{padding:14px 0}
+summary{font-size:15px}
+footer{padding-block:28px 96px}
+.bar-fixed{position:fixed;left:0;right:0;bottom:0;z-index:10;background:rgba(18,16,13,.94);border-top:1px solid var(--line);padding:10px 20px calc(10px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;justify-content:space-between;gap:12px;backdrop-filter:blur(6px)}
+.bar-fixed .p{display:flex;flex-direction:column;line-height:1.3}
+.bar-fixed .p b{font-family:var(--latin);font-weight:500;font-size:22px;color:var(--gold)}
+.bar-fixed .p small{font-size:11px;color:var(--dim)}
+.bar-fixed .btn{padding:12px 22px;font-size:15px}
+</style>
+
+<div class="wrap">
+
+<section class="hero" aria-labelledby="h1">
+  <p class="eyebrow">J · Personal Finance</p>
+  <h1 id="h1">有在存，也有在投<br>但你說得出<em>每一筆錢</em><br>在做什麼嗎？</h1>
+  <svg class="route" viewBox="0 0 640 90" role="img" aria-label="從現在到目標的一條路線">
+    <path d="M10 70 C 120 70, 150 20, 260 34 S 420 78, 520 30 S 600 18, 630 20" fill="none" stroke="#C9A96B" stroke-width="1.2"/>
+    <circle cx="10" cy="70" r="4" fill="#C9A96B"/><circle cx="260" cy="34" r="3" fill="#12100D" stroke="#C9A96B"/><circle cx="520" cy="30" r="3" fill="#12100D" stroke="#C9A96B"/><circle cx="630" cy="20" r="5" fill="#E2CB98"/>
+    <text x="10" y="88" fill="#8F8572" font-size="12" font-family="Noto Serif TC, serif">現在</text>
+    <text x="606" y="44" fill="#8F8572" font-size="12" font-family="Noto Serif TC, serif">目標</text>
+  </svg>
+  <p class="brand">MY MONEY MAP</p>
+  <p class="mute">用你自己的數字，畫出一張每個月照著走的地圖。<br>約一小時，看一段、填一格，填完就是你的。</p>
+</section>
+
+<section aria-labelledby="pain">
+  <div class="stack">
+    <h2 id="pain">如果你也常這樣想</h2>
+    <ul class="pains">
+      <li>薪水進來，月底就不見了，不知道錢跑去哪</li>
+      <li>想買房、想出國、想存第一個 100 萬，但不知道每個月要放多少</li>
+      <li>錢都放活存比較安心，又怕放著被通膨吃掉</li>
+    </ul>
+    <p class="mute">不是你不努力，是沒有人帶你<em>用自己的數字</em>排好順序。</p>
+  </div>
+</section>
+
+<section aria-labelledby="five">
+  <div class="stack">
+    <h2 id="five">填完這張地圖，你會知道</h2>
+    <ul class="gets">
+      <li><b>1</b>你現在站在哪，每月真正留下多少</li>
+      <li><b>2</b>每個目標，哪一年會到</li>
+      <li><b>3</b>預備金要存多少、放哪裡</li>
+      <li><b>4</b>發薪日，每一筆錢去哪個帳戶</li>
+      <li><b>5</b>跌的時候，事先就知道怎麼做</li>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="mapview">
+  <div class="stack">
+    <h2 id="mapview">最後，你會拿到這樣一張地圖</h2>
+    <div class="map" aria-label="Money Map 範例">
+      <div class="map-head"><span class="t">AMY'S MAP</span><span class="tag">範例・虛構學員</span></div>
+      <div class="nums">
+        <div><small>月收入</small><b>45,000</b></div>
+        <div><small>每月可存</small><b>15,000</b></div>
+        <div><small>淨資產</small><b>250,000</b></div>
+      </div>
+      <div class="bars" aria-label="每月 15,000 的分配">
+        <div class="bar"><span>預備金</span><i style="--w:33%"></i><span>5,000</span></div>
+        <div class="bar"><span>目標</span><i style="--w:27%"></i><span>4,000</span></div>
+        <div class="bar"><span>長期成長</span><i style="--w:40%"></i><span>6,000</span></div>
+      </div>
+      <div class="goals">
+        <div><span>預備金存滿 6 個月必要支出</span><span>2027.08</span></div>
+        <div><span>日本旅行 6 萬</span><span>2028.01</span></div>
+        <div><span>淨資產破 100 萬</span><span>2030.12</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="fit">
+  <div class="fit">
+    <div><h3>適合你，如果</h3><ul><li>18–35 歲，有收入、存了一點錢</li><li>想仔細把自己的財務狀況搞清楚</li><li>想要一個照著做就好的系統</li></ul></div>
+    <div class="no"><h3>不適合你，如果</h3><ul><li>想找明牌、想要短期翻倍</li><li>不想花時間釐清自己的財務狀況</li></ul></div>
+  </div>
+</section>
+
+<section id="price" aria-labelledby="pricing">
+  <div class="price">
+    <p class="amt">US$29</p>
+    <p class="dim" style="font-size:14px">約 NT$900・一次購買，永久回看</p>
+    <ul>
+      <li>8 章影片課程＋Money Map 互動工具</li>
+      <li>完課解鎖最終地圖與每月行動清單</li>
+    </ul>
+    <div class="buy">
+      <a class="btn" href="https://www.skool.com/ddl-6397/classroom" target="_blank" rel="noopener">立即購買</a>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="faq">
+  <div class="stack">
+    <h2 id="faq">常見問題</h2>
+    <div>
+      <details><summary>我完全沒投資過，看得懂嗎？</summary><p>可以。第 04 章會從現金、股票、ETF 是什麼開始講，所有計算工具都會幫你算好。</p></details>
+      <details><summary>要花多久時間？</summary><p>整堂課程上完＋填寫工具約一小時。每章看一段、填一格，可以照自己的速度。</p></details>
+      <details><summary>會告訴我要買哪一支股票嗎？</summary><p>不會。課程教你用框架和自己的財務狀況做決定，不提供個別投資建議。</p></details>
+      <details><summary>課程影片在哪裡？</summary><p>課程放在【DDL 定點流】Skool 社群內的教室，購買後就能直接觀看。</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>MY MONEY MAP・J</p>
+  <p>本課程內容為理財知識與規劃框架，不構成個別投資建議。投資有風險，請自行評估。</p>
+</footer>
+
+</div>
+
+<div class="bar-fixed">
+  <div class="p"><b>US$29</b><small>一次購買，永久回看</small></div>
+  <a class="btn" href="https://www.skool.com/ddl-6397/classroom" target="_blank" rel="noopener">立即購買</a>
+</div>
+
+</body></html>
